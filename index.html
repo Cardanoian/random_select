@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>랜덤 발표자 뽑기</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app__header">
+      <h1 class="app__title">랜덤 발표자 뽑기</h1>
+      <p class="app__subtitle">등록된 학생 중에서 발표자를 무작위로 뽑습니다</p>
+    </header>
+
+    <main class="app__main">
+      <section class="spotlight" aria-labelledby="spotlight-label">
+        <p id="spotlight-label" class="spotlight__label">발표자</p>
+        <div class="spotlight__name" id="result" aria-live="polite" aria-atomic="true">버튼을 눌러 발표자를 뽑아보세요</div>
+      </section>
+
+      <button type="button" id="pickBtn" class="btn btn--primary btn--xl">발표자 뽑기</button>
+
+      <section class="panel" aria-labelledby="panel-label">
+        <h2 id="panel-label" class="panel__title">학생 관리</h2>
+
+        <form id="addForm" class="add-form" autocomplete="off">
+          <label class="add-form__label" for="nameInput">학생 이름</label>
+          <div class="add-form__row">
+            <input
+              type="text"
+              id="nameInput"
+              class="add-form__input"
+              placeholder="이름을 입력하세요"
+              maxlength="20"
+              autocomplete="off"
+            />
+            <button type="submit" class="btn btn--primary">추가</button>
+          </div>
+        </form>
+
+        <div class="list-box">
+          <p class="list-box__count">등록된 학생 <span id="count" class="list-box__count-num">0</span>명</p>
+          <ul id="studentList" class="student-list" role="list" aria-label="학생 목록"></ul>
+          <p id="emptyMsg" class="list-box__empty">아직 등록된 학생이 없습니다. 위에서 이름을 추가해 보세요.</p>
+        </div>
+
+        <button type="button" id="resetBtn" class="btn btn--ghost btn--danger">전체 초기화</button>
+      </section>
+    </main>
+  </div>
+
+  <script src="./script.js" defer></script>
+</body>
+</html>

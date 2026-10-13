@@ -1,0 +1,324 @@
+/* 색상 토큰: 검은 배경 + 네온 시안(단일 액센트) + 네온 핑크(삭제/위험) */
+:root {
+  --bg: #070a0f;
+  --surface: #0d1117;
+  --surface-2: #11161f;
+  --border: rgba(255, 255, 255, 0.08);
+  --text: #e8edf5;
+  --muted: #7d8794;
+  --accent: #22e0ff;
+  --accent-glow: rgba(34, 224, 255, 0.45);
+  --danger: #ff3d6e;
+  --danger-glow: rgba(255, 61, 110, 0.4);
+  --radius: 4px;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg);
+  /* 배경: 은은한 상단 시안 빛 + 얕은 네온 그리드(3겹 레이어) */
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(34, 224, 255, 0.08), transparent 70%),
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.app__header {
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--accent);
+  box-shadow: 0 1px 0 0 var(--accent-glow);
+}
+
+.app__title {
+  margin: 0;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.app__subtitle {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.app__main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.spotlight {
+  background-color: var(--surface);
+  border: 1px solid rgba(34, 224, 255, 0.25);
+  border-radius: var(--radius);
+  padding: 28px 20px;
+  text-align: center;
+  box-shadow: 0 0 24px rgba(34, 224, 255, 0.12), inset 0 0 32px rgba(34, 224, 255, 0.04);
+}
+
+.spotlight__label {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 0.9rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.spotlight__name {
+  color: var(--muted);
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 500;
+  word-break: keep-all;
+  transition: transform 200ms ease;
+}
+
+/* 뽑힌 이름은 교실 뒤에서도 보이도록 매우 크게 + 네온 글로우 */
+.spotlight__name.is-picked {
+  color: var(--text);
+  font-size: clamp(2.75rem, 12vw, 8rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 12px var(--accent-glow), 0 0 28px var(--accent-glow);
+  animation: pop 220ms ease-out;
+}
+
+@keyframes pop {
+  from { transform: scale(0.96); opacity: 0.6; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.btn {
+  min-height: 48px;
+  padding: 0 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.btn--primary {
+  border-color: var(--accent);
+  color: var(--accent);
+  background-color: transparent;
+}
+
+.btn--primary:hover {
+  background-color: var(--accent);
+  color: #04121a;
+  box-shadow: 0 0 18px var(--accent-glow);
+}
+
+.btn--xl {
+  min-height: 64px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.btn--ghost {
+  background-color: transparent;
+  border-color: var(--border);
+  color: var(--muted);
+}
+
+.btn--ghost:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--text);
+}
+
+.btn--danger {
+  border-color: rgba(255, 61, 110, 0.5);
+  color: var(--danger);
+}
+
+.btn--danger:hover {
+  background-color: var(--danger);
+  color: #1a0510;
+  box-shadow: 0 0 16px var(--danger-glow);
+}
+
+.btn--icon {
+  min-height: 40px;
+  padding: 0 12px;
+  font-size: 0.9rem;
+  border-color: rgba(255, 61, 110, 0.35);
+  color: var(--danger);
+  background-color: transparent;
+}
+
+.btn--icon:hover {
+  background-color: var(--danger);
+  color: #1a0510;
+}
+
+.panel {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.panel__title {
+  margin: 0 0 16px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.add-form {
+  margin-bottom: 20px;
+}
+
+.add-form__label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.add-form__row {
+  display: flex;
+  gap: 8px;
+}
+
+.add-form__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--surface-2);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.add-form__input::placeholder {
+  color: var(--muted);
+}
+
+.add-form__input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(34, 224, 255, 0.25);
+}
+
+.list-box__count {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.list-box__count-num {
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.student-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+
+.student-list__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 4px;
+  border-bottom: 1px solid var(--border);
+}
+
+.student-list__name {
+  color: var(--text);
+  font-size: 1.05rem;
+  word-break: keep-all;
+}
+
+.list-box__empty {
+  margin: 16px 0 0;
+  padding: 16px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  color: var(--muted);
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.panel > .btn--danger {
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* 360px 좁은 화면에서 입력줄을 세로로 쌓아 깨짐 방지 */
+@media (max-width: 400px) {
+  .app {
+    padding: 16px 12px 32px;
+  }
+  .spotlight {
+    padding: 22px 14px;
+  }
+  .add-form__row {
+    flex-direction: column;
+  }
+  .add-form__input,
+  .add-form__row .btn {
+    width: 100%;
+  }
+  .btn--xl {
+    min-height: 56px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
